@@ -12,6 +12,7 @@ export default class ChangeIndicator extends Component {
           fontWeight: "bold",
         }}
       >
+        {this.props.delta > 0 && "+"}
         {this.props.delta.toFixed(2)} %
       </Text>
     );

@@ -1,23 +1,64 @@
 import React, { Component } from "react";
 
 import PricingListItem from "../components/PricingListItem";
+import ErrorMessage from "../components/ErrorMessage";
+import currencyTicker from "../api/currencyTicker";
 
 export default class PricingList extends Component {
+  state = {
+    data: [],
+    error: null,
+  };
+
+  fetchData = async () => {
+    try {
+      console.log("Will Call API!!!!!");
+      const data = await currencyTicker.getPriceData();
+      console.log("Called API!!!");
+      console.log(data);
+      this.setState({
+        data,
+      });
+    } catch (err) {
+      this.setState({ error: err.message });
+    }
+  };
+
+  componentDidMount() {
+    this.fetchData();
+  }
+
   render() {
+    if (this.state.error) {
+      return <ErrorMessage message={this.state.error} />;
+    }
     return (
       <>
-        {[0, 1].map((_, i) => (
-          <PricingListItem
-            key={i}
-            imageURL="./asset/img/logo.png"
-            symbol={i === 0 ? "BTC" : "COSMOS"}
-            name="Bitcoin"
-            price={184.567864}
-            priceDelta={-2.5}
-            marketCap={184.562864}
-            marketDelta={0.38}
-          />
-        ))}
+        {this.state.data.map(
+          (
+            {
+              imageURL,
+              symbol,
+              name,
+              price,
+              marketCap,
+              priceDelta,
+              marketDelta,
+            },
+            i
+          ) => (
+            <PricingListItem
+              key={symbol}
+              imageURL={imageURL}
+              symbol={symbol}
+              name={name}
+              price={price}
+              priceDelta={priceDelta}
+              marketCap={marketCap}
+              marketDelta={marketDelta}
+            />
+          )
+        )}
       </>
     );
   }
