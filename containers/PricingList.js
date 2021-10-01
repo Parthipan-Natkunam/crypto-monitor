@@ -12,10 +12,7 @@ export default class PricingList extends Component {
 
   fetchData = async () => {
     try {
-      console.log("Will Call API!!!!!");
       const data = await currencyTicker.getPriceData();
-      console.log("Called API!!!");
-      console.log(data);
       this.setState({
         data,
       });

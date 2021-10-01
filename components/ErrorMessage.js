@@ -7,18 +7,30 @@ export default class ErrorMessage extends Component {
       <View
         style={{
           height: "95%",
-          backgroundColor: "#ffdbd9",
           color: "#0d0101",
           alignItems: "center",
           justifyContent: "center",
         }}
       >
         <Image
-          style={{ width: 100, height: "auto" }}
-          source={{ uri: "asset/img/error.png" }}
+          style={{
+            height: 64,
+            width: 64,
+            marginRight: 8,
+          }}
+          source={{
+            uri: "./asset/img/notification.png",
+          }}
         />
-        <View>
-          <Text style={{ fontWeight: "bold", fontSize: 20 }}>
+        <View style={{ marginTop: 8, marginBottom: 8 }}>
+          <Text
+            style={{
+              fontWeight: "bold",
+              fontSize: 20,
+              marginBottom: 8,
+              alignSelf: "center",
+            }}
+          >
             Operation Failed!
           </Text>
           <Text>{this.props.message}</Text>
