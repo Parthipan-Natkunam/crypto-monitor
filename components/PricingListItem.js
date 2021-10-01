@@ -12,16 +12,27 @@ export default class PricingListItem extends Component {
           backgroundColor: "#ccc",
           padding: 10,
           borderRadius: 12,
-          border: " 1px solid #000",
-          marginBottom: 18,
+          border: "1px solid #000",
+          margin: 18,
         }}
       >
         <View
           style={{
             border: "none",
+            alignItems: "center",
+            marginBottom: 4,
+            fontWeight: "bold",
+            fontSize: 14,
+          }}
+        >
+          <Text>{this.props.name}</Text>
+        </View>
+
+        <View
+          style={{
+            border: "none",
             flexDirection: "row",
             alignItems: "center",
-            justifyContent: "space-between",
             padding: 5,
           }}
         >
@@ -29,7 +40,6 @@ export default class PricingListItem extends Component {
             imageURL={this.props.imageURL}
             symbol={this.props.symbol}
           />
-          <Text>{this.props.name}</Text>
           <StackedStats
             delta={this.props.priceDelta}
             heading="Price ($)"

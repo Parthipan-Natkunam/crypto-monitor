@@ -10,6 +10,7 @@ export default class ChangeIndicator extends Component {
           color: this.props.delta < 0 ? "#730701" : "#006e0b",
           backgroundColor: this.props.delta < 0 ? "#f29994" : "#76de80",
           fontWeight: "bold",
+          alignSelf: "center",
         }}
       >
         {this.props.delta > 0 && "+"}
