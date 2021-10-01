@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { View } from "proton-native";
 
 import PricingListItem from "../components/PricingListItem";
 import ErrorMessage from "../components/ErrorMessage";
@@ -12,11 +13,16 @@ export default class PricingList extends Component {
     loading: true,
   };
 
+  firstFetch = true;
+  intervalId = null;
+
   fetchData = async () => {
     try {
-      this.setState({
-        loading: true,
-      });
+      if (this.firstFetch) {
+        this.setState({
+          loading: true,
+        });
+      }
       const data = await currencyTicker.getPriceData();
       this.setState({
         data,
@@ -27,19 +33,38 @@ export default class PricingList extends Component {
     }
   };
 
+  componentDidUpdate() {
+    this.firstFetch = false;
+  }
+
   componentDidMount() {
-    this.fetchData();
+    this.intervalId = setInterval(() => this.fetchData(), 12000);
+  }
+
+  componentWillUnmount() {
+    if (this.intervalId) clearInterval(this.intervalId);
   }
 
   render() {
     if (this.state.error) {
-      return <ErrorMessage message={this.state.error} />;
+      return (
+        <ErrorMessage
+          message={this.state.error}
+          icon="./asset/img/notification.png"
+        />
+      );
     }
     if (this.state.loading) {
       return <LoadingMessage />;
     }
     return (
-      <>
+      <View
+        style={{
+          flexDirection: "row",
+          flexWrap: "wrap",
+          height: "100%",
+        }}
+      >
         {this.state.data.map(
           (
             {
@@ -65,7 +90,7 @@ export default class PricingList extends Component {
             />
           )
         )}
-      </>
+      </View>
     );
   }
 }
