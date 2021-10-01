@@ -6,9 +6,8 @@ export default class ContentLayout extends Component {
     return (
       <View
         style={{
-          padding: 20,
-          marginTop: 30,
-          marginBottom: 20,
+          marginTop: 20,
+          flexBasis: "100%",
         }}
       >
         {this.props.children}

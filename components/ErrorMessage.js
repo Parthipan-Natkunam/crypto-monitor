@@ -8,8 +8,6 @@ export default class ErrorMessage extends Component {
         style={{
           height: "95%",
           color: "#0d0101",
-          alignItems: "center",
-          justifyContent: "center",
         }}
       >
         <Image
@@ -19,10 +17,15 @@ export default class ErrorMessage extends Component {
             marginRight: 8,
           }}
           source={{
-            uri: "./asset/img/notification.png",
+            uri: this.props.icon,
           }}
         />
-        <View style={{ marginTop: 8, marginBottom: 8 }}>
+        <View
+          style={{
+            marginTop: 8,
+            marginBottom: 8,
+          }}
+        >
           <Text
             style={{
               fontWeight: "bold",
